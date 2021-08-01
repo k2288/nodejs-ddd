@@ -1,7 +1,13 @@
+import { Replacements } from "i18n";
+
+export interface I18nMessage{
+  text:string,
+  varibales?:Replacements
+}
 
 export interface IGuardResult {
   succeeded: boolean;
-  message?: string;
+  message?: string | I18nMessage;
 }
 
 export interface IGuardArgument {
@@ -22,7 +28,7 @@ export class Guard {
 
   public static againstNullOrUndefined (argument: any, argumentName: string): IGuardResult {
     if (argument === null || argument === undefined) {
-      return { succeeded: false, message: `${argumentName} is null or undefined` }
+      return { succeeded: false, message: {text:`{{{name}}} is null or undefined`,varibales:{name:argumentName}} }
     } else {
       return { succeeded: true }
     }

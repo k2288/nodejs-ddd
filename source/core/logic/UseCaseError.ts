@@ -1,12 +1,15 @@
+import { Replacements } from "i18n";
 
 interface IUseCaseErrorError {
-  message: string;
+  text: string;
+  variables?:Replacements
 }
 
 export abstract class UseCaseError implements IUseCaseErrorError {
-  public readonly message: string;
+  public readonly text: string;
+  public readonly variables?:Replacements
   
-  constructor (message: string) {
-    this.message = message;
+  constructor (message: string,variables:Replacements) {
+    this.text = message;
   }
 }

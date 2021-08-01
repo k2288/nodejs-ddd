@@ -1,3 +1,4 @@
 {
-    "user not found":"کاربر یافت نشد"
+	"User not found": "کاربر یافت نشد",
+	"Incorrect username or password": "نام کاربری یا رمز عبور اشتباه است"
 }

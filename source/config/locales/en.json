@@ -1,5 +1,6 @@
 {
 	"password": "password",
 	"User not found": "User not found",
-	"Incorrect username or password": "Incorrect username or password"
+	"Incorrect username or password": "Incorrect username or password",
+	"{{{name}}} is null or undefined": "{{{name}}} is null or undefined"
 }

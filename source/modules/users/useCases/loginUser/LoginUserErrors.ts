@@ -5,8 +5,9 @@ import { UseCaseError } from "../../../../core/logic/UseCaseError";
 export namespace LoginUserErrors{
     export class UserNotFound extends Result<UseCaseError>{
         constructor(){
+            console.log(i18n.getLocale())
             super(false,{
-                message :i18n.__("User not found")
+                text :"User not found"
             }as UseCaseError);
         }
     }
@@ -14,7 +15,7 @@ export namespace LoginUserErrors{
     export class IncorrectUserOrPassword extends Result<UseCaseError>{
         constructor(){
             super(false,{
-                message:i18n.__("Incorrect username or password")
+                text:"Incorrect username or password"
             })
         }
     }

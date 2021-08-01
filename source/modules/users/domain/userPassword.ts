@@ -17,7 +17,7 @@ export class UserPassword extends ValueObject<UserPasswordProps> {
     }
 
     public static create(password: string): Result<UserPassword> {
-        const guardResult = Guard.againstNullOrUndefined(password, i18n.__('password'));
+        const guardResult = Guard.againstNullOrUndefined(password, 'password');
 
         if (!guardResult.succeeded) {
             return Result.fail<UserPassword>(guardResult.message);
