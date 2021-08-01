@@ -16,12 +16,12 @@ export abstract class BaseController {
     }
 
     public static jsonResponse(res: express.Response, code: number, message: string) {
-        return res.status(code).json({ message });
+        return res.status(code).send(message);
     }
 
     public ok<T>(res: express.Response, dto?: T) {
         if (!!dto) {
-            return res.status(200).json(dto);
+            return res.status(200).send(dto);
         } else {
             return res.sendStatus(200);
         }
@@ -60,7 +60,7 @@ export abstract class BaseController {
     }
 
     public fail(error: Error | string) {
-        return this.res.status(400).json({
+        return this.res.status(400).send({
             message: error.toString()
         });
     }

@@ -1,5 +1,5 @@
 import http from 'http';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -28,14 +28,19 @@ app.use(i18n.init);
 
 app.use('/api/v1', v1Router)
 
+app.use(function(req, res, next) {
+    return res.status(404).send({ message: "route not found" });
+});
 
-
-app.use(async (err: Error, req: Request, res: Response) => {
-    if (err instanceof BaseError) {
-        res.status(err.httpCode).send(err);
-    } else {
+app.use( (err: any, req: Request, res: Response,next: NextFunction) => {
+    console.log(1)
+    // console.log(res)
+    // if (err instanceof BaseError) {
+    //     res.status(err.httpCode).send(err);
+    // } else {
+        
         res.status(500).send({ message: err.message });
-    }
+    // }
 });
 
 

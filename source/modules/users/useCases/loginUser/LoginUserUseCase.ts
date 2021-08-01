@@ -3,12 +3,9 @@ import { Either, left, Result, right } from '../../../../core/logic/Result';
 import { User } from '../../domain/user';
 import { UserPassword } from '../../domain/userPassword';
 import { IUserRepo } from '../../repos/userRepo';
-import { LoginUserDto } from './LoginUserDto';
+import { LoginUserDto, LoginUserResponseDto } from './LoginUserDto';
 import { LoginUserErrors } from './LoginUserErrors';
 
-interface LoginUserResponseDto{
-    token:string
-}
 
 type Response = Either<LoginUserErrors.UserNotFound | LoginUserErrors.IncorrectUserOrPassword | Result<any>, Result<LoginUserResponseDto>>;
 
@@ -56,6 +53,6 @@ export class LoginUserUseCase implements UseCase<LoginUserDto, Promise<any>> {
             id: existUser.id
         });
 
-        return right(Result.ok<LoginUserResponseDto>({token:token})) as Response
+        return right(Result.ok<LoginUserResponseDto>({token:token,user:{username:user.username}})) as Response
     }
 }
