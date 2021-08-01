@@ -5,6 +5,7 @@ import { UserPassword } from "../domain/userPassword";
 
 export class UserMap extends Mapper<User>{
     public static toDomain(raw:any):User{
+
         const userOrError=User.create({
             username:raw.username,
             password:UserPassword.create(raw.password).getValue(),

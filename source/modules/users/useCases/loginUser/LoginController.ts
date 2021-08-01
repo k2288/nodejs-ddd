@@ -12,6 +12,7 @@ export class LoginController extends BaseController {
     }
 
     protected async executeImpl(): Promise<any> {
+        
         const dto: LoginUserDto = this.req.body as LoginUserDto;
         try {
             const result=await this.loginUserUseCase.execute(dto);
@@ -22,11 +23,11 @@ export class LoginController extends BaseController {
                 const error = result.value;
                 switch(error.constructor){
                     case LoginUserErrors.UserNotFound:
-                        return this.notFound(error.getValue().message)
+                        return this.notFound(error.errorValue())
                     case LoginUserErrors.IncorrectUserOrPassword:
-                        return this.clientError(error.getValue().message)
+                        return this.clientError(error.errorValue())
                     default:
-                        return this.fail(error.getValue().message);
+                        return this.fail(error.errorValue());
                 }
             }
 

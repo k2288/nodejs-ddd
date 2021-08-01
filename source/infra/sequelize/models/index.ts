@@ -28,7 +28,7 @@ const createModels = () => {
   // Get all models
   const modelsList = fs.readdirSync(path.resolve(__dirname, "./"))
     .filter((t) => ~t.indexOf('.js') && !~t.indexOf("index") && !~t.indexOf(".map"))
-    .map((model) => sequelize.import(__dirname + '/' + model))
+    .map((model) => require(path.join(__dirname, model))(sequelize,Sequelize))
 
   // Camel case the models
   for (let i = 0; i < modelsList.length; i++) {

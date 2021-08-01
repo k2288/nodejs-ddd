@@ -8,7 +8,7 @@ export abstract class BaseController {
 
     protected abstract executeImpl(): Promise<void | any>;
 
-    public execute(req: express.Request, res: express.Response): void {
+    public execute=(req: express.Request, res: express.Response): void=> {
         this.req = req;
         this.res = res;
 

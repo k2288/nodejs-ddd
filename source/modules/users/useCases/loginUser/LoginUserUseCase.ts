@@ -20,11 +20,7 @@ export class LoginUserUseCase implements UseCase<LoginUserDto, Promise<any>> {
     }
 
     async execute(request: LoginUserDto): Promise<Response> {
-        const existUser = await this.userRepo.findByUsername(request.username);
 
-        if (!existUser) {
-            return left(new LoginUserErrors.UserNotFound()) as Response;
-        }
 
         const passwordOrError = UserPassword.create(request.password);
         if (passwordOrError.isFailure) {
@@ -42,6 +38,12 @@ export class LoginUserUseCase implements UseCase<LoginUserDto, Promise<any>> {
         }
 
         const user = userOrError.getValue()
+
+        const existUser = await this.userRepo.findByUsername(request.username);
+
+        if (!existUser) {
+            return left(new LoginUserErrors.UserNotFound()) as Response;
+        }
 
         const isEqual = await user.password.comparePassword(existUser.password.value);
 

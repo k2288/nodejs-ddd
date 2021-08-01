@@ -42,7 +42,7 @@ app.use(async (err: Error, req: Request, res: Response) => {
 
 const httpServer = http.createServer(app);
 
-httpServer.listen(config.server.port, () => {
+const httpserver=httpServer.listen(config.server.port, () => {
     console.log(`[App]: Server listening on ${config.server.hostname}:${config.server.port}`);
 });
 
@@ -50,4 +50,4 @@ process.on('uncaughtException', (error: Error) => {
     process.exit(1);
 });
 
-export { app };
+export { httpserver };
